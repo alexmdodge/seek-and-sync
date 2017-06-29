@@ -1,0 +1,29 @@
+{
+  "name": "seek-n-sync",
+  "version": "0.1.0",
+  "description": "A tool for managing work between two independent projects. The tool is meant to be structure agnostic, where two development teams can manage their own workflows. Usually the case is one project is a subset of the other which is how this tool began.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexmdodge/seek-n-sync.git"
+  },
+  "keywords": [
+    "npm",
+    "tooling",
+    "sync",
+    "git",
+    "submodules",
+    "sub-directory",
+    "sub-projects",
+    "project-management"
+  ],
+  "author": "Alex Dodge <alex.dodge@redspace.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexmdodge/seek-n-sync/issues"
+  },
+  "homepage": "https://github.com/alexmdodge/seek-n-sync#readme"
+}
