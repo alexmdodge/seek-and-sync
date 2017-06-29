@@ -4,7 +4,8 @@
   "description": "A tool for managing work between two independent projects. The tool is meant to be structure agnostic, where two development teams can manage their own workflows. Usually the case is one project is a subset of the other which is how this tool began.",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "bump:patch": "node bumpversion.js patch"
   },
   "repository": {
     "type": "git",
@@ -25,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/alexmdodge/seek-n-sync/issues"
   },
-  "homepage": "https://github.com/alexmdodge/seek-n-sync#readme"
+  "homepage": "https://github.com/alexmdodge/seek-n-sync#readme",
+  "dependencies": {
+    "bump-regex": "2.7.0"
+  }
 }

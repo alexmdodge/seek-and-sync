@@ -22,11 +22,29 @@ to sync information between the other independent repositories.
 
 Inside the root of the project create an `.snsrc` file. The file has the following structure,
 
-```json
+```javascript
 {
-  // Root is where your project is located. Userul
-  'root': '.',
-  'partner': '/PARTNER_PROJECT_LOCATION',
-  '
+  // The name of the project or module as it is in the parent project
+  'root_name': 'my-sub-project',
+
+  // Root is where your project is located. Change this if you're managing
+  // a nested folder within another project.
+  'root_path': '.',
+
+  // Where the other independent project is located on your machine. Should 
+  // be the top level of the project, but you can specify a sub-directory if
+  // you know your project won't be moved to another folder.
+  'parent_path': '/path',
+
+  // This project defaults to managing the projects with Git. If you're not
+  // using Git and would simply prefer to manage the projects without version
+  // control then disable this flag.
+  'git_operations': true,
+
+  // Could add feature for managing default branches to ensure proper data
+  'default_branch': false,
+  
+  // Before syncing or pushing to the partner project
+  'perform_check': false,
 }
 ```
