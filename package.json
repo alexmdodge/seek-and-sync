@@ -8,9 +8,9 @@
   },
   "scripts": {
     "test": "jest",
-    "bump:patch": "node bumpversion.js patch && npm version patch",
-    "bump:minor": "node bumpversion.js minor && npm version minor",
-    "bump:major": "node bumpversion.js major && npm version major"
+    "bump:patch": "npm version patch && node bumpversion.js patch",
+    "bump:minor": "npm version minor && node bumpversion.js minor",
+    "bump:major": "npm version major && node bumpversion.js major"
   },
   "repository": {
     "type": "git",
