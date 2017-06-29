@@ -10,7 +10,8 @@
     "test": "jest",
     "bump:patch": "npm version patch && node bumpversion.js patch",
     "bump:minor": "npm version minor && node bumpversion.js minor",
-    "bump:major": "npm version major && node bumpversion.js major"
+    "bump:major": "npm version major && node bumpversion.js major",
+    "bump:push": "git add -A && git commit -m 'Version $npm_package_version' && git push && git push --tags"
   },
   "repository": {
     "type": "git",

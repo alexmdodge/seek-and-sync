@@ -14,7 +14,7 @@
  * than that of the parent project.
  * 
  * Author: Alex Dodge
- * Version: 0.1.1
+ * Version: 0.1.2
  */
 
 var shell = require('shelljs');
