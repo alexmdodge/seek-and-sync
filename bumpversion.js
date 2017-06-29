@@ -1,4 +1,3 @@
-#! /usr/bin/env node
 /**
  *  _    __               _                ____                      
  * | |  / /__  __________(_)___  ____     / __ )__  ______ ___  ____ 
@@ -10,41 +9,45 @@
  * for readability and cross-checking purposes.
  */
 var fs = require('fs');
+var shell = require('shelljs');
 var bump = require('bump-regex');
 
-// Update the file list with all desired version files
-var fileList = [
-  './index.js',
-]
+// Ensure git directory clean
+console.log(shell.exec('[[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]] && echo "*"').code);
 
-// There could be an options object for reach file depending
-// on version specificity
-var options = {
-  type: process.argv[2],
-  key: 'version',
-}
+// // Update the file list with all desired version files
+// var fileList = [
+//   './index.js',
+// ]
 
-// Loop through each file in the list, pass it through the bump
-// function, then return the result
-fileList.forEach(file => fs.readFile(file, 'utf8', (err, data) => {
-  if ( err ) {
-    console.log(`Error: ${err}`);
-  } else {
-    options.str = data;
+// // There could be an options object for reach file depending
+// // on version specificity
+// var options = {
+//   type: process.argv[2],
+//   key: 'version',
+// }
 
-    // Bump version of all the strings
-    bump(options, (err, out) => {
-      if ( err) {
-        console.log(`Error: ${err}`);
-      } else {
-        fs.writeFile(file, out.str, err => {
-          if (err) {
-            console.log(`Error: ${err}`);
-          } else {
-            console.log(`File bumped: ${file}`);
-          }
-        });
-      }
-    });
-  }
-}));
+// // Loop through each file in the list, pass it through the bump
+// // function, then return the result
+// fileList.forEach(file => fs.readFile(file, 'utf8', (err, data) => {
+//   if ( err ) {
+//     console.log(`Error: ${err}`);
+//   } else {
+//     options.str = data;
+
+//     // Bump version of all the strings
+//     bump(options, (err, out) => {
+//       if ( err) {
+//         console.log(`Error: ${err}`);
+//       } else {
+//         fs.writeFile(file, out.str, err => {
+//           if (err) {
+//             console.log(`Error: ${err}`);
+//           } else {
+//             console.log(`File bumped: ${file}`);
+//           }
+//         });
+//       }
+//     });
+//   }
+// }));
