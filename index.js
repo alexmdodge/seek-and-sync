@@ -16,3 +16,7 @@
  * Author: Alex Dodge
  * Version: 0.1.1
  */
+
+var shell = require('shelljs');
+
+shell.exec('echo Test script: naming works');

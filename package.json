@@ -3,9 +3,14 @@
   "version": "0.1.1",
   "description": "A tool for managing work between two independent projects. The tool is meant to be structure agnostic, where two development teams can manage their own workflows. Usually the case is one project is a subset of the other which is how this tool began.",
   "main": "index.js",
+  "bin": {
+    "sns": "index.js"
+  },
   "scripts": {
     "test": "jest",
-    "bump:patch": "node bumpversion.js patch"
+    "bump:patch": "bumpversion.js patch && npm version patch",
+    "bump:minor": "bumpversion.js minor && npm version minor",
+    "bump:major": "bumpversion.js major && npm version major"
   },
   "repository": {
     "type": "git",
