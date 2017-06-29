@@ -13,7 +13,11 @@ var shell = require('shelljs');
 var bump = require('bump-regex');
 
 // Ensure git directory clean
-console.log(shell.exec('[[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]] && echo "*"').code);
+var command = '[[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]] && echo "*"';
+if ( shell.exec(command).code === 0) {
+  console.log('You have uncommitted changes. Please clean then try again.');
+  process.exit(-1);
+}
 
 // // Update the file list with all desired version files
 // var fileList = [
