@@ -6,6 +6,7 @@ const common = require('common-tags');
 const chalk = require('chalk');
 const sync = require('../sync');
 const Utils = require('../utils.js');
+const package = require('../../package.json');
 
 module.exports = function(conf) {
 
@@ -18,7 +19,7 @@ module.exports = function(conf) {
   let hr = () => console.log('\t\t\t\t\t----');
 
   program
-    .version('0.1.2')
+    .version(package.version)
     .description(`
     ${green('Seek and Sync')} is a tool for managing the sharing of modules 
     between rapidly changing projects.
