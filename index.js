@@ -10,13 +10,27 @@
  * Seek and Sync is tool for managing development between two independent 
  * projects. The tool is meant to be structure agnostic, where two development 
  * teams can manage their own workflows. The primary use case is when one 
- * project is a subset, and the development workflow of the project is separate 
+ * project is a subset, and the development workflow of the root project is separate 
  * than that of the parent project.
  * 
  * Author: Alex Dodge
  * Version: 0.1.2
  */
 
-var shell = require('shelljs');
+// Project Configuration Variables
+const Utils = require('./modules/utils.js');
+const rootConf = require('rc')('sns', {
+  name: 'my-project',
+  path: process.cwd(),
+  parent_path: false,
+  git: false,
+  git_check: false,
+  default_branch: false,
+})
 
-shell.exec('echo Test script: naming works');
+const conf = Object.assign({}, rootConf, {
+  path: Utils.fixPath(process.cwd(), rootConf.path),
+});
+
+// Enable CLI
+require('./modules/cli')(conf);

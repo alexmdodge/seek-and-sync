@@ -1,5 +1,5 @@
 {
-  "name": "seek-n-sync",
+  "name": "seek-and-sync",
   "version": "0.1.2",
   "description": "A tool for managing work between two independent projects. The tool is meant to be structure agnostic, where two development teams can manage their own workflows. Usually the case is one project is a subset of the other which is how this tool began.",
   "main": "index.js",
@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "jest",
+    "test:watch": "jest --watch",
     "bump:patch": "npm version patch && node bumpversion.js patch",
     "bump:minor": "npm version minor && node bumpversion.js minor",
     "bump:major": "npm version major && node bumpversion.js major",
@@ -35,7 +36,11 @@
   "homepage": "https://github.com/alexmdodge/seek-n-sync#readme",
   "dependencies": {
     "bump-regex": "2.7.0",
+    "chalk": "2.0.1",
+    "commander": "2.10.0",
+    "common-tags": "1.4.0",
     "jest": "20.0.4",
+    "jest-cli": "20.0.4",
     "rc": "1.2.1",
     "shelljs": "0.7.8"
   }
