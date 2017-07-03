@@ -14,7 +14,7 @@
  * than that of the parent project.
  * 
  * Author: Alex Dodge
- * Version: 0.2.0
+ * Version: 0.2.1
  */
 
 // Project Configuration Variables
