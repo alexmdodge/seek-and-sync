@@ -5,7 +5,7 @@ const program = require('commander');
 const common = require('common-tags');
 const chalk = require('chalk');
 const sync = require('../sync');
-const Utils = require('../utils.js');
+const utils = require('../common/utils.js');
 const package = require('../../package.json');
 
 module.exports = function(conf) {
