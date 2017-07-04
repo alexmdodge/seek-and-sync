@@ -9,9 +9,9 @@ const utils = require('../common/utils.js');
  * @class Config
  * @param conf the configuration to test
  */
-class ConfigManager {
+const configManager = {
 
-  static verifyConfiguration(conf) {
+  async verifyConfiguration(conf) {
     console.log('\n',common.stripIndents`
       ${chalk.bold('Your current configuration is')} :
     `);
@@ -43,20 +43,23 @@ class ConfigManager {
       });
       console.log('');
       console.log('Proceed with sync based on the above configuration? (yes/no)');
-      reader.prompt('> ');
-      reader.on('line', input => {
-        if (utils.matchValueIgnoreCase(input, ['yes', 'y'])) {
-          console.log('\n\t\t--------------- Starting Sync ---------------');
-          process.exit(1);
-        } else {
-          console.log(`${chalk.yellow('Exiting sync')}. Please update configuration with desired settings.`);
-          process.exit(1);
-        }
-      });
-    }
-  }
 
-  static initializeConfiguration(conf) {
+      return new Promise((resolve, reject) => {
+        reader.prompt('> ');
+        reader.on('line', input => {
+          if (utils.matchValueIgnoreCase(input, ['yes', 'y'])) {
+            console.log('\n\t\t--------------- Starting Sync ---------------');
+            resolve(true);
+          } else {
+            console.log(`${chalk.yellow('Exiting sync')}. Please update configuration with desired settings.`);
+            process.exit(1);
+          }
+        });
+      })
+    }
+  },
+
+  initializeConfiguration(conf) {
     // Check that configuration setup properly
     if ( !conf ) {
       console.log('\n',common.stripIndents`
@@ -85,4 +88,4 @@ class ConfigManager {
   }
 }
 
-module.exports = ConfigManager;
+module.exports = configManager;

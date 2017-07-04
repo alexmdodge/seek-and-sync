@@ -43,4 +43,4 @@ describe('initializeConfiguration()', () => {
   test('should be called', () => {
     expect(configManager.initializeConfiguration(testConf));
   });
-})
+});

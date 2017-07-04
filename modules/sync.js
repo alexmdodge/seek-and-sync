@@ -1,4 +1,5 @@
 const configManager = require('./common/configManager.js');
+const gitManager = require('./common/gitManager.js');
 
 /**
  * This file procedurally walks through each step of the
@@ -14,18 +15,18 @@ const configManager = require('./common/configManager.js');
  */
 module.exports = function(conf, syncType) {
   configManager.verifyConfiguration(conf);
-  const hasGit = configManager.verifyGit(conf.git);
+  const hasGit = gitManager.verifyGit(conf.git);
   
   if ( hasGit ) {
-    gitManager.updateBranches(conf.parent_path);
-    gitManager.pullBranches(conf.parent_path);
+    // gitManager.updateBranches(conf.parent_path);
+    // gitManager.pullBranches(conf.parent_path);
 
-    // Copy operations for Git dependent
-    gitManager.copyTo(conf.parent_path, syncType);
-    gitManager.status(conf.parent_path);
+    // // Copy operations for Git dependent
+    // gitManager.copyTo(conf.parent_path, syncType);
+    // gitManager.status(conf.parent_path);
   } else {
-    dirManager.backup(conf.parent_path, syncType);
-    dirManager.copyTo(conf.parent_path, syncType);
-    dirManager.status(conf.parent_path);
+    // dirManager.backup(conf.parent_path, syncType);
+    // dirManager.copyTo(conf.parent_path, syncType);
+    // dirManager.status(conf.parent_path);
   }
 }
