@@ -4,24 +4,17 @@
 const program = require('commander');
 const common = require('common-tags');
 const chalk = require('chalk');
-const sync = require('../sync');
+const sync = require('../operations/sync.js');
 const utils = require('../common/utils.js');
 const package = require('../../package.json');
 
 module.exports = function(conf) {
-
-  // Colour and Format Helpers
-  let blue = text => chalk.blue(text);
-  let bold = text => chalk.bold(text);
-  let yellow = text => chalk.yellow(text);
-  let green = text => chalk.green(text);
   let space = () => console.log('');
-  let hr = () => console.log('\t\t\t\t\t----');
 
   program
     .version(package.version)
     .description(`
-    ${green('Seek and Sync')} is a tool for managing the sharing of modules 
+    ${chalk.green('Seek and Sync')} is a tool for managing the sharing of modules 
     between rapidly changing projects.
     `);
 
@@ -31,12 +24,12 @@ module.exports = function(conf) {
     .action(function(key) {
       space();
       console.log(common.oneLineTrim`
-        Based on the ${bold('.snsrc')} file you provided, your 
+        Based on the ${chalk.bold('.snsrc')} file you provided, your 
         configuration is,
       `);
 
       Object.keys(conf).map(key => {
-        console.log(`  • ${blue(key)}: ${conf[key]}`);
+        console.log(`  • ${chalk.blue(key)}: ${conf[key]}`);
       });
       space();
     });
@@ -49,11 +42,7 @@ module.exports = function(conf) {
     `)
     .option('-p, --parent-path <path>', 'Specify explicit path to parent project')
     .action(function(options) {
-      const syncConf = Object.assign({}, conf, {
-        parent_path: options.parentPath || conf.parent_path,
-      });
-      
-      sync(syncConf);
+      sync(conf);
     });
 
   program.parse(process.argv);

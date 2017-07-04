@@ -18,16 +18,22 @@
  */
 
 // Project Configuration Variables
-const Utils = require('./modules/utils.js');
+const Utils = require('./modules/common/utils.js');
 const rootConf = require('rc')('sns', {
-  name: 'my-project',
-  path: process.cwd(),
-  parent_path: false,
+  name: null,
+  path: null,
+  parent_path: null,
   git: false,
   git_check: false,
   default_branch: false,
-})
+});
 
+
+// Verify Initial Configuration
+const configManager = require('./modules/common/configManager.js');
+configManager.initializeConfiguration(rootConf);
+
+// Fix for absolute project path
 const conf = Object.assign({}, rootConf, {
   path: Utils.fixPath(process.cwd(), rootConf.path),
 });
