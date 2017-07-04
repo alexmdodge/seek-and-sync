@@ -51,6 +51,30 @@ class Utils {
       return dirPath[0];
     }
   }
+
+  /**
+   * Matches a string for a single test value
+   * or an array of values.
+   * 
+   * @static
+   * @param value string to test against
+   * @param tests single or array of test values to check
+   * @returns true if one of tests values found
+   * @memberof Utils
+   */
+  static matchValueIgnoreCase(value, tests) {
+    if (typeof tests === 'string') {
+      tests = [ tests ];
+    }
+    let matched = false;
+    for (let test of tests) {
+      const testRegex = new RegExp(`${test}`, 'ig');
+      if (value.match(testRegex)) {
+        matched = true;
+      }
+    }
+    return matched;
+  }
 }
 
 module.exports = Utils;

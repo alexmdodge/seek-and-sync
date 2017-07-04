@@ -58,3 +58,38 @@ describe('findDir()', () => {
       .toEqual(parentPath);
   });
 });
+
+/**
+ * Function: matchValueIgnoreCase
+ * Accepts a string value where a single test or array of test
+ * values are to be matched against. Useful for checking user
+ * input for multiple values without handling regex.
+ */
+describe('matchValueIgnoreCase()', () => {
+  let stringsToSearch, testSingle, testArray;
+  beforeEach(() => {
+    stringsToSearch = {
+      first: 'Yes I would like to test',
+      second: 'A string which does not contain matches',
+    };
+    testSingle = 'yes';
+    testArray = ['y', 'yess', 'test'];
+
+  });
+  test('should return true for a match with a single test', () => {
+    expect(utils.matchValueIgnoreCase(stringsToSearch.first, testSingle))
+      .toBeTruthy();
+  });
+  test('should return true for a match with an array of tests', () => {
+    expect(utils.matchValueIgnoreCase(stringsToSearch.first, testArray))
+      .toBeTruthy();
+  });
+  test('should return false for value with no single test match', () => {
+    expect(utils.matchValueIgnoreCase(stringsToSearch.second, testSingle))
+      .toBeFalsy();
+  });
+  test('should return false for value with no single test match', () => {
+    expect(utils.matchValueIgnoreCase(stringsToSearch.second, testArray))
+      .toBeFalsy();
+  });
+});
