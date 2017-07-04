@@ -43,16 +43,19 @@ Inside the root of the project create an `.snsrc` file. The file has the followi
   // you know your module won't be moved to place within the parent project.
   "parent_path": "/path",
 
+  // The default parent branch to pull from. The sync operation will confirm the
+  // default and give you the option to change if desired.
+  "parent_branch": false,
+
+  // Provides an option for a revert call for non git directories. It only stores
+  // the most recent sync operation. Disabled when git is available.
+  "backup": false,
+
   // This project defaults to managing the projects with Git. If you're not
   // using Git and would simply prefer to manage the projects without version
   // control then set this flag to false.
   "git": true,
 
-  // Before syncing or pushing to the parent project
-  "git_check": false,
-
-  // Could add feature for managing default branches to ensure proper data
-  "default_branch": false,
 }
 ```
 
