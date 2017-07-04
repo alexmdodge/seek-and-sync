@@ -2,7 +2,7 @@
   "name": "my-project",
   "path": ".",
   "parent_path": "/path",
-  "git": true,
-  "git_check": false,
-  "default_branch": false
+  "parent_branch": false,
+  "backup": false,
+  "git": true
 }

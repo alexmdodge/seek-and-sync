@@ -46,7 +46,7 @@ class ConfigManager {
       reader.prompt('> ');
       reader.on('line', input => {
         if (utils.matchValueIgnoreCase(input, ['yes', 'y'])) {
-          console.log('--- Starting Sync ---');
+          console.log('\n\t\t--------------- Starting Sync ---------------');
           process.exit(1);
         } else {
           console.log(`${chalk.yellow('Exiting sync')}. Please update configuration with desired settings.`);
