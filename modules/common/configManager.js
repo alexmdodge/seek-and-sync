@@ -1,11 +1,6 @@
 const chalk = require('chalk');
 const common = require('common-tags');
 const utils = require('../common/utils.js');
-const reader = require('readline').createInterface({
-  input: process.stdin,
-  output: process.stdout,
-  terminal: false,
-});
 
 /**
  * Utility class for managing the configuration object
@@ -41,6 +36,11 @@ class ConfigManager {
         static path in the ${chalk.white('.snsrc')} configuration file.
       `);
     } else {
+      const reader = require('readline').createInterface({
+        input: process.stdin,
+        output: process.stdout,
+        terminal: false,
+      });
       console.log('');
       console.log('Proceed with sync based on the above configuration? (yes/no)');
       reader.prompt('> ');

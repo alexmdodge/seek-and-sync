@@ -1,5 +1,6 @@
 const configManager = require('./configManager.js');
 const defaultConf = require('../defaults.json');
+let testConf;
 
 /**
  * Wraps a set timeout in a promise to delay the check
@@ -13,6 +14,15 @@ async function delayCheck(value, time) {
   });
 }
 
+beforeAll(() => {
+  testConf = Object.assign({}, defaultConf, {
+    name: 'my-test-project',
+    path: '.',
+    parent_path: '/some-path',
+    parent_branch: 'master',
+  })
+})
+
 /**
  * Function: verify
  * Checks the provided user configuration and prompts
@@ -20,7 +30,7 @@ async function delayCheck(value, time) {
  */
 describe('verify()', () => {
   test('should be called', () => {
-    expect(configManager.verifyConfiguration(defaultConf));
+    expect(configManager.verifyConfiguration(testConf));
   });
 });
 
@@ -31,6 +41,6 @@ describe('verify()', () => {
  */
 describe('initializeConfiguration()', () => {
   test('should be called', () => {
-    expect(configManager.initializeConfiguration(defaultConf));
+    expect(configManager.initializeConfiguration(testConf));
   });
 })

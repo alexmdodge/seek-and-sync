@@ -29,7 +29,7 @@ module.exports = function(conf) {
       `);
 
       Object.keys(conf).map(key => {
-        console.log(`  • ${chalk.blue(key)}: ${conf[key]}`);
+        console.log(`  • ${chalk.yellow(key)}: ${conf[key]}`);
       });
       space();
     });
@@ -56,11 +56,13 @@ module.exports = function(conf) {
       sync(conf, 'push');
     });
 
-    program
-      .command('')
-      .action(() => {
-        console.log('Please provide a command. Use -h to see available options.');
-      })
-
   program.parse(process.argv);
+
+  if (process.argv.length < 3) {
+    program.help();
+  } else {
+    if (!program._execs[program.args[0]]){
+      console.log('Unknown command. Use -h to see available options.');
+    }
+  }
 }

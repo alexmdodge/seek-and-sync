@@ -1,4 +1,4 @@
-const configManager = require('../common/configManager.js');
+const configManager = require('./common/configManager.js');
 
 /**
  * This file procedurally walks through each step of the

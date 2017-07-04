@@ -1,8 +1,8 @@
 {
-  "name": "my-project",
-  "path": ".",
-  "parent_path": "/path",
-  "parent_branch": false,
+  "name": null,
+  "path": null,
+  "parent_path": null,
+  "parent_branch": "master",
   "backup": false,
   "git": true
 }

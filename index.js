@@ -19,14 +19,8 @@
 
 // Project Configuration Variables
 const Utils = require('./modules/common/utils.js');
-const rootConf = require('rc')('sns', {
-  name: null,
-  path: null,
-  parent_path: null,
-  git: false,
-  git_check: false,
-  default_branch: false,
-});
+const defaultConf = require('./modules/defaults.json');
+const rootConf = require('rc')('sns', defaultConf);
 
 
 // Verify Initial Configuration
