@@ -39,4 +39,4 @@ const conf = Object.assign({}, rootConf, {
 });
 
 // Enable CLI
-require('./modules/cli')(conf);
+require('./modules/cli.js')(conf);

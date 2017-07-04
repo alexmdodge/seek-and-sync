@@ -4,9 +4,9 @@
 const program = require('commander');
 const common = require('common-tags');
 const chalk = require('chalk');
-const sync = require('../operations/sync.js');
-const utils = require('../common/utils.js');
-const package = require('../../package.json');
+const sync = require('./sync.js');
+const utils = require('./common/utils.js');
+const package = require('../package.json');
 
 module.exports = function(conf) {
   let space = () => console.log('');
@@ -35,15 +35,32 @@ module.exports = function(conf) {
     });
 
     program
-    .command('sync')
+    .command('pull')
     .description(common.oneLine`
-      Check for updates in parent directory and pull changes into 
-      current module.
+      Check for updates in project directories and pull changes into 
+      current project.
     `)
     .option('-p, --parent-path <path>', 'Specify explicit path to parent project')
     .action(function(options) {
-      sync(conf);
+      sync(conf, 'pull');
     });
+
+    program
+    .command('push')
+    .description(common.oneLine`
+      Check for updates in parent directory and push changes into 
+      parent project.
+    `)
+    .option('-p, --parent-path <path>', 'Specify explicit path to parent project')
+    .action(function(options) {
+      sync(conf, 'push');
+    });
+
+    program
+      .command('')
+      .action(() => {
+        console.log('Please provide a command. Use -h to see available options.');
+      })
 
   program.parse(process.argv);
 }

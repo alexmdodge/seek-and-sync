@@ -1,5 +1,5 @@
 const configManager = require('./configManager.js');
-const defaultConf = require('./defaultConf.json');
+const defaultConf = require('../defaults.json');
 
 /**
  * Wraps a set timeout in a promise to delay the check
