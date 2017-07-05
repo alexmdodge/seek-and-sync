@@ -21,7 +21,7 @@ two projects.
 Install the package,
 
 ```
-npm install seek-n-sync
+npm install seek-and-sync
 ```
 
 Inside of your project, you will create a file that you will use to manage configuration
@@ -43,8 +43,8 @@ Inside the root of the project create an `.snsrc` file. The file has the followi
   // you know your module won't be moved to place within the parent project.
   "parent_path": "/path",
 
-  // The default parent branch to pull from. The sync operation will confirm the
-  // default and give you the option to change if desired.
+  // Usually you'll be managing the status of the project where this plugin is installed,
+  // so the default branch is whatever you're on.
   "parent_branch": false,
 
   // Provides an option for a revert call for non git directories. It only stores

@@ -34,7 +34,7 @@ module.exports = function(conf) {
       space();
     });
 
-    program
+  program
     .command('pull')
     .description(common.oneLine`
       Check for updates in project directories and pull changes into 
@@ -45,7 +45,7 @@ module.exports = function(conf) {
       sync(conf, 'pull');
     });
 
-    program
+  program
     .command('push')
     .description(common.oneLine`
       Check for updates in parent directory and push changes into 
@@ -56,13 +56,11 @@ module.exports = function(conf) {
       sync(conf, 'push');
     });
 
+  program
+    .command('*').action(function() {
+      console.log('Unknown command. Use -h to see available options.');
+    });
+
   program.parse(process.argv);
 
-  if (process.argv.length < 3) {
-    program.help();
-  } else {
-    if (!program._execs[program.args[0]]){
-      console.log('Unknown command. Use -h to see available options.');
-    }
-  }
 }

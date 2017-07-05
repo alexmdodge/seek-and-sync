@@ -41,6 +41,7 @@ const configManager = {
         output: process.stdout,
         terminal: false,
       });
+
       console.log('');
       console.log('Proceed with sync based on the above configuration? (yes/no)');
 
@@ -48,7 +49,8 @@ const configManager = {
         reader.prompt('> ');
         reader.on('line', input => {
           if (utils.matchValueIgnoreCase(input, ['yes', 'y'])) {
-            console.log('\n\t\t--------------- Starting Sync ---------------');
+            console.log('\n\t\t--------------- Starting Sync ---------------\n');
+            process.stdin.pause();
             resolve(true);
           } else {
             console.log(`${chalk.yellow('Exiting sync')}. Please update configuration with desired settings.`);
