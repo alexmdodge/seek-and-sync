@@ -1,35 +1,56 @@
 const gitManager = require('./gitManager.js');
 const shell = require('shelljs');
-
-/* Cross test variables */
-const testPath = `${__dirname}/.tmp`;
+const common = require('common-tags');
 
 /**
- * Helper functions for setup and teardown
+ * Initializes a test Git project with branches
+ * and information for testing git related operations.
  */
-function initializeGitDir() {
+async function initializeGitRepo(repo, ...branches) {
+  const path = `${__dirname}/${repo}`;
+  const git = `git -C ${path}`;
+  const gitSetup = common.oneLine`
+    ${git} init &&
+    ${git} add --all &&
+    ${git} commit -m 'init' &&
+    ${git} checkout -b ${branches[0]}
+  `;
+
   return new Promise((resolve, reject) => {
-    // create directory with file
-    shell.mkdir(testPath);
-    shell.touch(`${testPath}/a.c`);
-    shell.exec(`git -C ${testPath} init`, (code, stdout, sterr) => {
-      if ( sterr) {
-        reject(sterr);
+    shell.mkdir(path);
+    shell.touch(`${path}/a.c`);
+
+    // Note that sterr still reports information for some commands
+    // regardless of error. Must check return for error in string
+    shell.exec(gitSetup, (code, stdout, sterr) => {
+      const regex = new RegExp('error', 'ig');
+      if ( regex.test(sterr) ) {
+        reject(`(Test Structure): ${sterr}`);
+      } else {
+        resolve(stdout);
       }
-      shell.exec(`git -C ${testPath} add --all`, (code, stdout, sterr) => {
-        if (sterr ) {
-          reject(sterr);
-        }
-        shell.exec(`git -C ${testPath} commit -m 'init'`, (code, stdout, sterr) => {
-          if (sterr) {
-            reject(sterr);
-          }
-          console.log(stdout);
-          resolve(true);
-        });
-      });
     });
   });
+}
+
+async function initializeLocalRemote() {
+  const testRemoteRepo = `.remote`;
+  await initializeGitRepo('.remote', 'remote');
+  return testRemoteRepo;
+}
+
+async function currentBranch(path) {
+  return new Promise((resolve) => {
+    shell.exec(`git -C ${path} rev-parse --abbrev-ref HEAD`, (code , stdout, sterr) => {
+      resolve(stdout);
+    })
+  });
+}
+
+function clearTestRepos(...args) {
+  for (let repo of repos) {
+    shell.rm('-rf', `${__dirname}/${repo}`);
+  }
 }
 
 /**
@@ -57,14 +78,20 @@ describe('verifyGit', () => {
  * to confirm. If branch is currently not active will
  */
 describe('changeBranch()', () => {
-  let testBranch = 'develop';
-  beforeAll(() => {
-    return initializeGitDir();
+  /* Cross test variables */
+  const testProject = '.project';
+  const testRemote = '.remote';
+  const testBranch = 'develop';
+  let projectPath = `${__dirname}/${testProject}`;
+  beforeEach(() => {
+    return initializeGitRepo(testProject, testBranch);
   })
-  test('should return old branch if unsuccessful', () => {
-    expect
+  test('should change the branch of the desired project to the desired branch' , async () => {
+    expect.assertions(1);
+    const beforeBranch = await currentBranch(projectPath);
+    await expect(gitManager.changeBranch(projectPath, testBranch)).resolve.toBeFalsy();
   });
-  afterAll(() => {
-    shell.rm('-R', `${__dirname}/.tmp`);
+  afterEach(() => {
+    clearTestRepos(testProject);
   });
 });

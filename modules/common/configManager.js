@@ -48,7 +48,7 @@ const configManager = {
       return new Promise((resolve, reject) => {
         reader.prompt('> ');
         reader.on('line', input => {
-          if (utils.matchValueIgnoreCase(input, ['yes', 'y'])) {
+          if (utils.matchValue(input, ['yes', 'y'])) {
             console.log('\n\t\t--------------- Starting Sync ---------------\n');
             process.stdin.pause();
             resolve(true);
