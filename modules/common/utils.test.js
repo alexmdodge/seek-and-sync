@@ -60,12 +60,12 @@ describe('findDir()', () => {
 });
 
 /**
- * Function: matchValueIgnoreCase
+ * Function: matchValue
  * Accepts a string value where a single test or array of test
  * values are to be matched against. Useful for checking user
  * input for multiple values without handling regex.
  */
-describe('matchValueIgnoreCase()', () => {
+describe('matchValue()', () => {
   let stringsToSearch, testSingle, testArray;
   beforeEach(() => {
     stringsToSearch = {
@@ -77,19 +77,19 @@ describe('matchValueIgnoreCase()', () => {
 
   });
   test('should return true for a match with a single test', () => {
-    expect(utils.matchValueIgnoreCase(stringsToSearch.first, testSingle))
+    expect(utils.matchValue(stringsToSearch.first, testSingle))
       .toBeTruthy();
   });
   test('should return true for a match with an array of tests', () => {
-    expect(utils.matchValueIgnoreCase(stringsToSearch.first, testArray))
+    expect(utils.matchValue(stringsToSearch.first, testArray))
       .toBeTruthy();
   });
   test('should return false for value with no single test match', () => {
-    expect(utils.matchValueIgnoreCase(stringsToSearch.second, testSingle))
+    expect(utils.matchValue(stringsToSearch.second, testSingle))
       .toBeFalsy();
   });
   test('should return false for value with no single test match', () => {
-    expect(utils.matchValueIgnoreCase(stringsToSearch.second, testArray))
+    expect(utils.matchValue(stringsToSearch.second, testArray))
       .toBeFalsy();
   });
 });

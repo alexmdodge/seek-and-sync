@@ -55,15 +55,17 @@ const utils = {
    * 
    * @param value string to test against
    * @param tests single or array of test values to check
+   * @param ignoreCase whether to ignore or pay attention to case
    * @returns true if one of tests values found
    */
-  matchValueIgnoreCase(value, tests) {
+  matchValue(value, tests, ignoreCase = true) {
     if (typeof tests === 'string') {
       tests = [ tests ];
     }
     let matched = false;
     for (let test of tests) {
-      const testRegex = new RegExp(`${test}`, 'ig');
+      const conditions = ignoreCase ? 'ig' : 'g';
+      const testRegex = new RegExp(`${test}`, conditions);
       if (value.match(testRegex)) {
         matched = true;
       }
