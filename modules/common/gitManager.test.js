@@ -47,7 +47,7 @@ async function currentBranch(path) {
   });
 }
 
-function clearTestRepos(...args) {
+function clearTestRepos(...repos) {
   for (let repo of repos) {
     shell.rm('-rf', `${__dirname}/${repo}`);
   }
@@ -77,21 +77,48 @@ describe('verifyGit', () => {
  * Takes a valid path to a Git project and a desired branch
  * to confirm. If branch is currently not active will
  */
-describe('changeBranch()', () => {
-  /* Cross test variables */
-  const testProject = '.project';
-  const testRemote = '.remote';
+// describe('changeBranch()', () => {
+//   /* Cross test variables */
+//   const testProject = '.project';
+//   const testRemote = '.remote';
+//   const testBranch = 'develop';
+//   let projectPath = `${__dirname}/${testProject}`;
+//   beforeEach(() => {
+//     return initializeGitRepo(testProject, testBranch);
+//   });
+//   afterEach(() => {
+//     return clearTestRepos(testProject);
+//   });
+//   test('should change the branch of the desired project to the desired branch' , async () => {
+//     expect.assertions(1);
+//     const beforeBranch = await currentBranch(projectPath);
+//     await expect(gitManager.changeBranch(projectPath, testBranch)).resolve.toBeFalsy();
+//   });
+// });
+
+/**
+ * Function: listBranches
+ * Takes a path to a git repository and returns a list of the 
+ * current available branches
+ */
+describe('listBranches()', () => {
+  const testProject = `.project`;
   const testBranch = 'develop';
-  let projectPath = `${__dirname}/${testProject}`;
+  const projectPath = `${__dirname}/${testProject}`;
   beforeEach(() => {
     return initializeGitRepo(testProject, testBranch);
-  })
-  test('should change the branch of the desired project to the desired branch' , async () => {
-    expect.assertions(1);
-    const beforeBranch = await currentBranch(projectPath);
-    await expect(gitManager.changeBranch(projectPath, testBranch)).resolve.toBeFalsy();
   });
   afterEach(() => {
-    clearTestRepos(testProject);
+    return clearTestRepos(testProject);
   });
-});
+  test('should return an array', async () => {
+    expect.assertions(1);
+    const branches = await gitManager.listBranches(projectPath);
+    expect(branches instanceof Array).toBeTruthy();
+  });
+  test('should have length equal to number of branches instantiated', async () => {
+    expect.assertions(1);
+    const branches = await gitManager.listBranches(projectPath);
+    expect(branches.length).toEqual(2);
+  });
+})
