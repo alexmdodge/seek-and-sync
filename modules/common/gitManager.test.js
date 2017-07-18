@@ -58,7 +58,7 @@ function clearTestRepos(...repos) {
  * Based on a boolean of whether the user would like to use
  * git, check and verify git is operational.
  */
-describe('verifyGit', () => {
+describe('verifyGit()', () => {
   let gitInstalled = !!shell.which('git');
 
   test('should return a boolean', () => {
@@ -77,24 +77,24 @@ describe('verifyGit', () => {
  * Takes a valid path to a Git project and a desired branch
  * to confirm. If branch is currently not active will
  */
-// describe('changeBranch()', () => {
-//   /* Cross test variables */
-//   const testProject = '.project';
-//   const testRemote = '.remote';
-//   const testBranch = 'develop';
-//   let projectPath = `${__dirname}/${testProject}`;
-//   beforeEach(() => {
-//     return initializeGitRepo(testProject, testBranch);
-//   });
-//   afterEach(() => {
-//     return clearTestRepos(testProject);
-//   });
-//   test('should change the branch of the desired project to the desired branch' , async () => {
-//     expect.assertions(1);
-//     const beforeBranch = await currentBranch(projectPath);
-//     await expect(gitManager.changeBranch(projectPath, testBranch)).resolve.toBeFalsy();
-//   });
-// });
+describe('changeBranch()', () => {
+  /* Cross test variables */
+  const testProject = '.project';
+  const testRemote = '.remote';
+  const testBranch = 'develop';
+  let projectPath = `${__dirname}/${testProject}`;
+  beforeEach(() => {
+    return initializeGitRepo(testProject, testBranch);
+  });
+  afterEach(() => {
+    return clearTestRepos(testProject);
+  });
+  test('should change the branch of the desired project to the desired branch' , async () => {
+    expect.assertions(1);
+    const beforeBranch = await currentBranch(projectPath);
+    await expect(gitManager.changeBranch(projectPath, testBranch)).resolve.toBeFalsy();
+  });
+});
 
 /**
  * Function: listBranches
@@ -121,4 +121,7 @@ describe('listBranches()', () => {
     const branches = await gitManager.listBranches(projectPath);
     expect(branches.length).toEqual(2);
   });
-})
+  test('should contain created branch', async () => {
+
+  });
+});

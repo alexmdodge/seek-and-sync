@@ -62,7 +62,7 @@ class GitManager {
 
     return new Promise((resolve, reject) => {
 
-      if (branches ) {
+      if ( branches ) {
         // if exists switch, if not create new
         shell.exec(`${git} branch`, (code, stdout, sterr) => {
           console.log(stdout);
