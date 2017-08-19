@@ -15,7 +15,9 @@ class GitManager {
       console.log('You have opted to use Git. Git valid on current machine.');
       return true;
     } else if (hasGit && !shell.which('git')) {
-      console.log('Error: Git cannot be found on this machine. Please install in order to use Git operations.');
+      console.log(
+        'Error: Git cannot be found on this machine. Please install in order to use Git operations.'
+      );
       return false;
     } else {
       console.log('You have opted out of using Git.');
@@ -34,9 +36,10 @@ class GitManager {
     const git = `git -C ${repoPath}`;
     return new Promise((resolve, reject) => {
       shell.exec(`${git} branch`, (code, stdout, sterr) => {
-        const branches = stdout.split(' ')
+        const branches = stdout
+          .split(' ')
           .map(branch => branch.trim())
-          .filter(branch => (branch && branch !== '*'));
+          .filter(branch => branch && branch !== '*');
         resolve(branches);
       });
     });
@@ -56,13 +59,12 @@ class GitManager {
 
     // Get current list of branches and return positive matches
     const branches = await this.listBranches(repoPath);
-    branches.filter( branch => {
+    branches.filter(branch => {
       return utils.matchValue(branch, newBranch);
     });
 
     return new Promise((resolve, reject) => {
-
-      if ( branches ) {
+      if (branches) {
         // if exists switch, if not create new
         shell.exec(`${git} branch`, (code, stdout, sterr) => {
           console.log(stdout);

@@ -19,9 +19,9 @@ beforeAll(() => {
     name: 'my-test-project',
     path: '.',
     parent_path: '/some-path',
-    parent_branch: 'master',
-  })
-})
+    parent_branch: 'master'
+  });
+});
 
 /**
  * Function: verify
@@ -30,7 +30,7 @@ beforeAll(() => {
  */
 describe('verify()', () => {
   test('should be called', () => {
-    expect(configManager.verifyConfiguration(testConf));
+    expect(configManager.verify(testConf));
   });
 });
 
@@ -41,6 +41,6 @@ describe('verify()', () => {
  */
 describe('initializeConfiguration()', () => {
   test('should be called', () => {
-    expect(configManager.initializeConfiguration(testConf));
+    expect(configManager.init(testConf));
   });
 });

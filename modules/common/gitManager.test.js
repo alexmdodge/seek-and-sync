@@ -24,7 +24,7 @@ async function initializeGitRepo(repo, ...branches) {
     // regardless of error. Must check return for error in string
     shell.exec(gitSetup, (code, stdout, sterr) => {
       const regex = new RegExp('error', 'ig');
-      if ( regex.test(sterr) ) {
+      if (regex.test(sterr)) {
         reject(`(Test Structure): ${sterr}`);
       } else {
         resolve(stdout);
@@ -40,10 +40,13 @@ async function initializeLocalRemote() {
 }
 
 async function currentBranch(path) {
-  return new Promise((resolve) => {
-    shell.exec(`git -C ${path} rev-parse --abbrev-ref HEAD`, (code , stdout, sterr) => {
-      resolve(stdout);
-    })
+  return new Promise(resolve => {
+    shell.exec(
+      `git -C ${path} rev-parse --abbrev-ref HEAD`,
+      (code, stdout, sterr) => {
+        resolve(stdout);
+      }
+    );
   });
 }
 
@@ -89,10 +92,12 @@ describe('changeBranch()', () => {
   afterEach(() => {
     return clearTestRepos(testProject);
   });
-  test('should change the branch of the desired project to the desired branch' , async () => {
+  test('should change the branch of the desired project to the desired branch', async () => {
     expect.assertions(1);
     const beforeBranch = await currentBranch(projectPath);
-    await expect(gitManager.changeBranch(projectPath, testBranch)).resolve.toBeFalsy();
+    await expect(
+      gitManager.changeBranch(projectPath, testBranch)
+    ).resolve.toBeFalsy();
   });
 });
 
@@ -121,7 +126,5 @@ describe('listBranches()', () => {
     const branches = await gitManager.listBranches(projectPath);
     expect(branches.length).toEqual(2);
   });
-  test('should contain created branch', async () => {
-
-  });
+  test('should contain created branch', async () => {});
 });

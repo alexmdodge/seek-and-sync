@@ -5,7 +5,6 @@ const shell = require('shelljs');
  * the tool, as well as managing data between interactions.
  */
 const utils = {
-
   /**
    * fixPath takes the user defined paths and returns a path relative
    * readable to the file system of the users local machine.
@@ -16,9 +15,9 @@ const utils = {
    */
   fixPath(callPath, userPath) {
     let fixedPath;
-    if ( userPath.indexOf('.') === 0) {
+    if (userPath.indexOf('.') === 0) {
       fixedPath = `${callPath}${userPath.substring(1)}`;
-    } else if ( userPath.indexOf('/') === 0) {
+    } else if (userPath.indexOf('/') === 0) {
       fixedPath = userPath;
     } else {
       fixedPath = `${callPath}${userPath}`;
@@ -36,10 +35,10 @@ const utils = {
    * @returns dirName absolute path, or parent path
    */
   findDir(parentPath, dirName) {
-    const dirPath = shell.find(parentPath).filter((path) => {
+    const dirPath = shell.find(parentPath).filter(path => {
       const dirPos = path.indexOf(dirName);
       const lastPos = path.length - dirName.length;
-      return (dirPos === lastPos);
+      return dirPos === lastPos;
     });
 
     if (dirPath.length === 0) {
@@ -60,7 +59,7 @@ const utils = {
    */
   matchValue(value, tests, ignoreCase = true) {
     if (typeof tests === 'string') {
-      tests = [ tests ];
+      tests = [tests];
     }
     let matched = false;
     for (let test of tests) {
@@ -72,6 +71,6 @@ const utils = {
     }
     return matched;
   }
-}
+};
 
 module.exports = utils;

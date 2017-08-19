@@ -22,14 +22,13 @@ const Utils = require('./modules/common/utils.js');
 const defaultConf = require('./modules/defaults.json');
 const rootConf = require('rc')('sns', defaultConf);
 
-
 // Verify Initial Configuration
 const configManager = require('./modules/common/configManager.js');
-configManager.initializeConfiguration(rootConf);
+configManager.init(rootConf);
 
 // Fix for absolute project path
 const conf = Object.assign({}, rootConf, {
-  path: Utils.fixPath(process.cwd(), rootConf.path),
+  path: Utils.fixPath(process.cwd(), rootConf.path)
 });
 
 // Enable CLI

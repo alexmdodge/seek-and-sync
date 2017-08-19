@@ -64,3 +64,5 @@ The testing mantra goes,
 * Assert the return value of incoming queries
 * Assert the direct public side effects of incoming commands
 * Expect outgoing commands to be sent using mocks
+
+# Project Implementation

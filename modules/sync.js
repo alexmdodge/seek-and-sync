@@ -16,8 +16,8 @@ const gitManager = require('./common/gitManager.js');
 module.exports = async function(conf, syncType) {
   await configManager.verifyConfiguration(conf);
   const hasGit = gitManager.verifyGit(conf.git);
-  
-  if ( hasGit ) {
+
+  if (hasGit) {
     gitManager.changeBranch(conf.parent_path, conf.parent_branch);
     // gitManager.pullRecent(conf.path, conf.parent_path);
 
@@ -29,4 +29,4 @@ module.exports = async function(conf, syncType) {
     // dirManager.copyTo(conf.parent_path, syncType);
     // dirManager.status(conf.parent_path);
   }
-}
+};

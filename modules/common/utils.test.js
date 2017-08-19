@@ -14,18 +14,18 @@ describe('fixPath()', () => {
       rootPathRelative: './relative/path',
       callPath: '/User/name/project',
       userPath: './sub/module',
-      fixedPath: '/User/name/project/sub/module',
-    }
+      fixedPath: '/User/name/project/sub/module'
+    };
   });
 
   test('absolute input does not change', () => {
-    expect(utils.fixPath(paths.callPath, paths.rootPathAbsolute))
-      .toBe(paths.rootPathAbsolute);
+    expect(utils.fixPath(paths.callPath, paths.rootPathAbsolute)).toBe(
+      paths.rootPathAbsolute
+    );
   });
 
   test('relative input should combine paths', () => {
-    expect(utils.fixPath(paths.callPath, paths.userPath))
-      .toBe(paths.fixedPath);
+    expect(utils.fixPath(paths.callPath, paths.userPath)).toBe(paths.fixedPath);
   });
 });
 
@@ -41,7 +41,7 @@ describe('findDir()', () => {
     parentPath = `${__dirname}/test`;
     trueProjectName = 'my-project';
     falseProjectName = 'faulty-project';
-    shell.mkdir('-p',`${__dirname}/test/a/b/my-project/c/d`);
+    shell.mkdir('-p', `${__dirname}/test/a/b/my-project/c/d`);
   });
 
   afterEach(() => {
@@ -49,13 +49,13 @@ describe('findDir()', () => {
   });
 
   test('should return a dir path longer than or equal to root', () => {
-    expect(utils.findDir(parentPath, trueProjectName).length)
-      .toBeGreaterThan(parentPath.length);
+    expect(utils.findDir(parentPath, trueProjectName).length).toBeGreaterThan(
+      parentPath.length
+    );
   });
 
   test('should return the same parent path when faulty', () => {
-    expect(utils.findDir(parentPath, falseProjectName))
-      .toEqual(parentPath);
+    expect(utils.findDir(parentPath, falseProjectName)).toEqual(parentPath);
   });
 });
 
@@ -70,26 +70,21 @@ describe('matchValue()', () => {
   beforeEach(() => {
     stringsToSearch = {
       first: 'Yes I would like to test',
-      second: 'A string which does not contain matches',
+      second: 'A string which does not contain matches'
     };
     testSingle = 'yes';
     testArray = ['y', 'yess', 'test'];
-
   });
   test('should return true for a match with a single test', () => {
-    expect(utils.matchValue(stringsToSearch.first, testSingle))
-      .toBeTruthy();
+    expect(utils.matchValue(stringsToSearch.first, testSingle)).toBeTruthy();
   });
   test('should return true for a match with an array of tests', () => {
-    expect(utils.matchValue(stringsToSearch.first, testArray))
-      .toBeTruthy();
+    expect(utils.matchValue(stringsToSearch.first, testArray)).toBeTruthy();
   });
   test('should return false for value with no single test match', () => {
-    expect(utils.matchValue(stringsToSearch.second, testSingle))
-      .toBeFalsy();
+    expect(utils.matchValue(stringsToSearch.second, testSingle)).toBeFalsy();
   });
   test('should return false for value with no single test match', () => {
-    expect(utils.matchValue(stringsToSearch.second, testArray))
-      .toBeFalsy();
+    expect(utils.matchValue(stringsToSearch.second, testArray)).toBeFalsy();
   });
 });
